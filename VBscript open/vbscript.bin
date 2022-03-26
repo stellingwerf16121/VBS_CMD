@@ -1,0 +1,16 @@
+On Error Resume Next
+
+cmd = ""
+
+out = "m.txt"
+Set a = CreateObject("Wscript.Shell").Exec(cmd)
+
+if Err.number <> 0 Then
+	wscript.quit
+End If
+
+Set o = CreateObject("Scripting.FileSystemObject")
+Set oo = o.CreateTextFile(out,True)
+oo.WriteLine(a.StdOut.ReadAll())
+oo.WriteLine(a.StdErr.ReadAll())
+oo.Close()
